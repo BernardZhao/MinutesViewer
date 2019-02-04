@@ -1,3 +1,21 @@
+const dirTree = require('directory-tree');
+const tree = dirTree("./bod/", { extensions: /\.md/ });
+
+function dirMapper(tree) {
+  let temp = {}
+  if ("name" in tree) {
+    temp.title = tree.name
+  }
+  if ("children" in tree) {
+    temp.children = tree.children.map(dirMapper)
+  } else {
+    temp = tree.path
+  }
+  return temp
+}
+
+console.log(JSON.stringify(tree.children.map(dirMapper)))
+
 module.exports = {
   title: 'Minutes',
   description: 'For viewing meeting notes',
@@ -8,19 +26,24 @@ module.exports = {
     sidebar: [
       {
         title: 'Board of Directors',
-        //path: '/bod/', /* Sidebar of current heading will be clickable like a route link */
-        children: [
-          {
-            title: '2019',
-            //path: '/bod/2019/', /* Sidebar of current heading will be clickable like a route link */
-            children: [
-              {
-                title: 'Spring',
-                path: '/bod/2019/Spring/', /* Sidebar of current heading will be clickable like a route link */
-              }
-            ]
-          }
-        ]
+        // children: [
+        //   {
+        //     title: '2019',
+        //     children: [
+        //       {
+        //         title: 'Spring',
+        //         children: [
+        //           "./bod/2019/Spring/2019-01-28.md"
+        //           // {
+        //           //   title: 'Spring',
+        //           //   path: '/bod/2019/Spring/',
+        //           // }
+        //         ]
+        //       }
+        //     ]
+        //   }
+        // ]
+        children: tree.children.map(dirMapper)
       }
     ]
   }

@@ -1,1 +1,1 @@
-find /path -type f -not -name "*.*" -exec mv "{}" "{}".md \;
+find . -type f -not -name "*.*" -exec mv "{}" "{}".md \;

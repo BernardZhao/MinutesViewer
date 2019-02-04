@@ -8,11 +8,11 @@ module.exports = {
     sidebar: [
       {
         title: 'Board of Directors',
-        path: '/bod/', /* Sidebar of current heading will be clickable like a route link */
+        //path: '/bod/', /* Sidebar of current heading will be clickable like a route link */
         children: [
           {
             title: '2019',
-            path: '/bod/2019/', /* Sidebar of current heading will be clickable like a route link */
+            //path: '/bod/2019/', /* Sidebar of current heading will be clickable like a route link */
             children: [
               {
                 title: 'Spring',

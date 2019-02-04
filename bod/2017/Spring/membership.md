@@ -1,3 +1,6 @@
+---
+title: membership minutes
+---
 tmochida          bod
 tanx              bod
 shichenh          bod

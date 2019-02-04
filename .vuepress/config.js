@@ -14,8 +14,6 @@ function dirMapper(tree) {
   return temp
 }
 
-console.log(JSON.stringify(tree.children.map(dirMapper)))
-
 module.exports = {
   title: 'Minutes',
   description: 'For viewing meeting notes',

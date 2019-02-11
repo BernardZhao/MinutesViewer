@@ -1,7 +1,8 @@
 const dirTree = require('directory-tree');
-const tree = dirTree("./bod/", { 
-  extensions: /\.md/ ,
-  attributes: ["birthTimeMS"]
+
+const tree = dirTree("./bod/", {
+  extensions: /\.md/,
+  attributes: ["birthtimeMs"]
 });
 
 function dirMapper(tree) {
@@ -16,6 +17,8 @@ function dirMapper(tree) {
   }
   return temp
 }
+
+//console.log(JSON.stringify(tree))
 
 module.exports = {
   title: 'Minutes',

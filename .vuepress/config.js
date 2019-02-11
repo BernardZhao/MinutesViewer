@@ -1,5 +1,8 @@
 const dirTree = require('directory-tree');
-const tree = dirTree("./bod/", { extensions: /\.md/ });
+const tree = dirTree("./bod/", { 
+  extensions: /\.md/ ,
+  attributes: ["birthTimeMS"]
+});
 
 function dirMapper(tree) {
   let temp = {}
@@ -7,7 +10,7 @@ function dirMapper(tree) {
     temp.title = tree.name
   }
   if ("children" in tree) {
-    temp.children = tree.children.map(dirMapper)
+    temp.children = tree.children.map(dirMapper).reverse()
   } else {
     temp = tree.path
   }
@@ -41,7 +44,7 @@ module.exports = {
         //     ]
         //   }
         // ]
-        children: tree.children.map(dirMapper)
+        children: tree.children.map(dirMapper).reverse()
       }
     ]
   }

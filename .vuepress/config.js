@@ -1,9 +1,5 @@
 const dirTree = require('directory-tree');
 
-const bodTree = dirTree("./bod/", {
-  extensions: /\.md/
-});
-
 function dirMapper(tree) {
   let temp = {}
   if ("name" in tree) {
@@ -17,6 +13,20 @@ function dirMapper(tree) {
   return temp
 }
 
+sidebar = [
+  // Adding a new sidebar item simply requires adding a new object
+  // with a title and target directory property.
+  {
+    title: "Board of Directors",
+    target: "./bod"
+  }
+].map((item) => {
+  item.children = dirTree(item.target, {
+    extensions: /\.md/
+  }).children.map(dirMapper).reverse()
+  return item
+})
+
 module.exports = {
   title: 'Minutes',
   description: 'For viewing meeting notes',
@@ -24,11 +34,6 @@ module.exports = {
     nav: [
       { text: "Home", link: "/" },
     ],
-    sidebar: [
-      {
-        title: 'Board of Directors',
-        children: bodTree.children.map(dirMapper).reverse()
-      }
-    ]
+    sidebar: sidebar
   }
 }

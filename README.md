@@ -18,4 +18,6 @@ node_modules/vuepress/cli.js dev
 node_modules/vuepress/cli.js build
 ```
 
+Note that built files must be served to be viewed correctly because of webpack.
+
 Built by bernardzhao and dphan.

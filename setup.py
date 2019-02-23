@@ -5,11 +5,11 @@ import glob
 import re
 
 owd = os.getcwd()
+
 # Makes the minute files into .md
 os.chdir("bod")
 minutes_reg = "[0-9]+[-|.][0-9]+[-|.][0-9]+"
 ext_reg = "[.][a-z]+"
-print(os.curdir)
 for roots, dirs, files in os.walk(os.curdir):
     for file in files:
         sub_path = os.path.relpath(roots, os.curdir)
@@ -34,13 +34,13 @@ for roots, dirs, files in os.walk(os.curdir):
             os.rename(file_path, file_path + ".md")
 
 print("Successfully made markdowns")
-
 os.chdir(owd)
+
 # Sanitizes the minute files to remove HTML stuff
 os.system("LC_CTYPE=C\nLANG=C\nfind bod/ -type f -exec sed -i '' 's|[<>]||g' {} +")
 print("Successfully Sanitized")
-
 os.chdir(owd)
+
 # Adds a title metadata in order to allow for searching and clean display in sidebar
 os.chdir("bod")
 for root, dirs, files in os.walk(os.curdir):
@@ -62,5 +62,6 @@ for root, dirs, files in os.walk(os.curdir):
                     result += line
                 with open(os.path.join(root, file), 'w') as f:
                     f.writelines(result)
+
 print("Successfully added titles")
         

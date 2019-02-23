@@ -15,23 +15,20 @@ for roots, dirs, files in os.walk(os.curdir):
         sub_path = os.path.relpath(roots, os.curdir)
         file_path = os.path.join(sub_path, file)
         new_path = file_path;
+        if ('#' in file):
+            new_path = new_path.replace('#', "")
+
         if (".virtual" in file):
-            new_path = file_path.replace(".virtual", "-virtual")
-            os.rename(file_path, new_path)
-            file = os.path.split(new_path)[1]
+            new_path = new_path.replace(".virtual", "-virtual")
 
         if(".txt" in file):
-            new_path = file_path.replace(".txt", ".md")
-            os.rename(file_path, new_path)
-            file = os.path.split(new_path)[1]
-        elif("-bod" in file or "-gm" in file):
-            new_path = file_path + ".md"
-            os.rename(file_path, new_path)
-            file = os.path.split(new_path)[1]
-        elif (re.search(minutes_reg, file) != None and re.search(ext_reg, file) == None):
-            sub_path = os.path.relpath(roots, os.curdir)
-            file_path = os.path.join(sub_path, file)
-            os.rename(file_path, file_path + ".md")
+            new_path = new_path.replace(".txt", ".md")
+        elif("-bod" in file or "-gm" in file or "-virtual" in new_path):
+            new_path = new_path + ".md"
+        elif (re.search(minutes_reg, file) != None and (re.search(ext_reg, file) == None)):
+            new_path = new_path + ".md"
+
+        os.rename(file_path, new_path)
 
 print("Successfully made markdowns")
 os.chdir(owd)

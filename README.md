@@ -12,10 +12,12 @@ Make sure you have npm installed first.
 npm install
 
 # start dev environment
-node_modules/vuepress/cli.js dev
+npm run dev
 
 # build
-node_modules/vuepress/cli.js build
+npm run build
 ```
+
+Note that built files must be served to be viewed correctly because of webpack.
 
 Built by bernardzhao and dphan.

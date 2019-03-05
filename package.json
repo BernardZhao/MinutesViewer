@@ -1,14 +1,11 @@
 {
-  "name": "ocfminutesviewer",
+  "name": "MinutesViewer",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "description": "For viewing OCF Minutes.",
   "scripts": {
     "dev": "vuepress dev",
-    "build": "vuepress build"
+    "build": "vuepress build",
+    "serve": "anywhere -d .vuepress/dist"
   },
   "author": "",
   "license": "ISC",

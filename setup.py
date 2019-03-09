@@ -17,17 +17,17 @@ for roots, dirs, files in os.walk(os.curdir):
         sub_path = os.path.relpath(roots, os.curdir)
         file_path = os.path.join(sub_path, file)
         new_path = file_path
-        if ('#' in file):
+        if '#' in file:
             new_path = new_path.replace('#', "")
 
-        if (".virtual" in file):
+        if ".virtual" in file:
             new_path = new_path.replace(".virtual", "-virtual")
 
-        if(".txt" in file):
+        if ".txt" in file:
             new_path = new_path.replace(".txt", ".md")
-        elif("-bod" in file or "-gm" in file or "-virtual" in new_path):
+        elif "-bod" in file or "-gm" in file or "-virtual" in new_path and re.search(ext_reg, file) == None:
             new_path = new_path + ".md"
-        elif (re.search(minutes_reg, file) != None and (re.search(ext_reg, file) == None)):
+        elif re.search(minutes_reg, file) != None and re.search(ext_reg, file) == None:
             new_path = new_path + ".md"
 
         os.rename(file_path, new_path)
@@ -60,18 +60,17 @@ for root, dirs, files in os.walk(os.curdir):
             result = ''
             if(should_add):
                 result = title
-                """for line in curr_lines:
-                    result += line
-                with open(os.path.join(root, file), 'w') as f:
-                    f.writelines(result)"""
             else:
                 for i in range(offset):
                     result += curr_lines[i]
             
-
+            line_break = '   \n'
             for i in range(offset, len(curr_lines)):
-                if '\n' in curr_lines[i] and re.search(list_reg, curr_lines[i]) == None:
-                    result += curr_lines[i].replace('\n', '\\') + '\n'
+                if '\n' in curr_lines[i] and \
+                    re.search(list_reg, curr_lines[i]) == None and \
+                    not curr_lines[i].isspace() and \
+                    not curr_lines[i].endswith(line_break):
+                    result += curr_lines[i].replace('\n', line_break)
                 else:
                     result += curr_lines[i]
             

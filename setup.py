@@ -4,6 +4,11 @@ import os
 import glob
 import re
 
+"""
+Set up script for converting the minutes files into .md files for display, removes HTML symbols, 
+and adds a title metadata and newline formatting for the .md files. This script will run on the entirety of the
+bod minutes files, regardless of whether or not they've already had the script run on them. 
+"""
 owd = os.getcwd()
 
 # Makes the minute files into .md
@@ -35,7 +40,7 @@ for roots, dirs, files in os.walk(os.curdir):
 print("Successfully made markdowns")
 os.chdir(owd)
 
-# Sanitizes the minute files to remove HTML stuff
+# Sanitizes the minute files to remove HTML symbols
 os.system("LC_CTYPE=C\nLANG=C\nfind bod/ -type f -exec sed -i '' 's|[<>]||g' {} +")
 print("Successfully Sanitized")
 os.chdir(owd)
@@ -56,15 +61,17 @@ for root, dirs, files in os.walk(os.curdir):
                     new_title = file.replace(".md", "") + " minutes"
                     title = f"---\ntitle: {new_title}\n---\n"
             
+            #offset by 3 to account for the 3 line title
             offset = 3
             result = ''
+            
             if(should_add):
                 result = title
             else:
                 for i in range(offset):
                     result += curr_lines[i]
             
-            line_break = '   \n'
+            line_break = '   \n' #represents a line break in markdown
             for i in range(offset, len(curr_lines)):
                 if '\n' in curr_lines[i] and \
                     re.search(list_reg, curr_lines[i]) == None and \
@@ -78,4 +85,5 @@ for root, dirs, files in os.walk(os.curdir):
                     f.writelines(result) 
 
 print("Successfully added titles")
+print("Setup finished!")
         
